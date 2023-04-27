@@ -8,7 +8,7 @@
 
 <img src="https://user-images.githubusercontent.com/110602224/234991688-638beb13-fc64-4b2c-8ab1-15e603519913.png" width=600 height=auto>
 
-## Solution (w BurpSuite)
+## Solution w/ BurpSuite
 
 Passive capture through BurpSuite Proxy reveals the password to be hidden in a HTML comment which is **h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7**.
 
@@ -16,7 +16,7 @@ Response to request **GET /**
 
 <img src="https://user-images.githubusercontent.com/110602224/234992588-870e8986-9ec5-44c7-8d2f-681450c85dec.png" width=600 height=auto>
 
-## Solution (w/ BurpSuite)
+## Solution w/o BurpSuite
 
 Any action associated with a right-click action triggers a listening event that make a pop up to appear.
 
