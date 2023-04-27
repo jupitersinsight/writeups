@@ -1,5 +1,9 @@
 # Level 0
 
+## Software used
+- Google Chrome + FOxyProxy
+- BurpSuite Community
+
 ## Hint
 
 <img src="https://user-images.githubusercontent.com/110602224/234989254-eccce971-fbe5-4d36-a0d4-16bfb4614599.png" width=600 height=auto>
