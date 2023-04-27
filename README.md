@@ -20,3 +20,4 @@ Here you can find a collection of Writeups of challenges, CTFs, boxes from platf
 |-------|------|
 |0      | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level0/writeup.md)|
 |1      | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level1/writeup.md)|
+|2      | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level2/writeup.md)|
