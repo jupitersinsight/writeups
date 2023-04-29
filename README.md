@@ -22,3 +22,5 @@ Here you can find a collection of Writeups of challenges, CTFs, boxes from platf
 |1      | http://natas1.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level1/writeup.md)|
 |2      | http://natas2.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level2/writeup.md)|
 |3      | http://natas3.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level3/writeup.md)|
+|4      | http://natas4.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level4/writeup.md)|
+|5      | http://natas5.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level5/writeup.md)|
