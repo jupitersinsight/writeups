@@ -1,4 +1,4 @@
-# WriteUps
+# Writeups
 
 Here you can find a collection of Writeups of challenges, CTFs, boxes from platforms like TryHackMe, HackTheBox, Hacker101, Vulnhub...
 
