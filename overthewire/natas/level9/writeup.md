@@ -43,7 +43,7 @@ The web server will execute the following list of commands ```grep -i ; cat /etc
 Injecting the command in the input field returns the password: **D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE**  
 <img src="https://user-images.githubusercontent.com/110602224/235476589-964678cb-116e-4f38-a739-39a00345ad94.png" width=600 height=auto>
 
-Using Burpsuite's module **Repeater** we need to URL-encode to avoid breaking the URL syntax (shortcut to URL-encode is **CTRL+U** on highlighted text).
+Using Burpsuite's module **Repeater** we need to URL-encode the payload to avoid breaking the URL syntax (shortcut to URL-encode is **CTRL+U** on highlighted text).
 <img src="https://user-images.githubusercontent.com/110602224/235477216-03b5a27b-1c34-463b-8182-4eca439a3ef6.png" width=900 height=auto>
 
 
