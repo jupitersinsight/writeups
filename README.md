@@ -27,3 +27,4 @@ Here you can find a collection of Writeups of challenges, CTFs, boxes from platf
 |6      | http://natas6.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level6/writeup.md)|
 |7      | http://natas7.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level7/writeup.md)|
 |8      | http://natas8.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level8/writeup.md)|
+|9      | http://natas9.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level9/writeup.md)|
