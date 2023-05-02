@@ -25,6 +25,8 @@ if($key != "") {
 
 ## Solution
 
+[preg_match](https://www.php.net/manual/en/function.preg-match.php): searches subject for a match to the regular expression given in pattern.
+
 GREP can search for a given pattern on multiple files, so all we need to do is using the "payload": **a /etc/natas_webpass/natas11**
 
 <img src="https://user-images.githubusercontent.com/110602224/235717843-85c7b06d-a5c9-4172-9e55-efd69794ad4e.png" width=600 height=auto>
