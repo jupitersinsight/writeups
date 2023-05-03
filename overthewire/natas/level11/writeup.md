@@ -5,6 +5,7 @@
 - Burspsuite Community
 
 ## Hint
+(source code)
 
 ```php
 <?
@@ -56,4 +57,32 @@ saveData($data);
 
 
 ?>
+
+<h1>natas11</h1>
+<div id="content">
+<body style="background: <?=$data['bgcolor']?>;">
+Cookies are protected with XOR encryption<br/><br/>
+
+<?
+if($data["showpassword"] == "yes") {
+    print "The password for natas12 is <censored><br>";
+}
+
+?>
+
+<form>
+Background color: <input name=bgcolor value="<?=$data['bgcolor']?>">
+<input type=submit value="Set color">
+</form>
 ```
+
+## Solution
+
+First of all, let's breakdown the code.
+
+[PHP Arrays](https://www.php.net/manual/en/language.types.array.php): An array in PHP is actually an ordered map. A map is a type that associates values to keys. This type is optimized for several different uses; it can be treated as an array, list (vector), hash table (an implementation of a map), dictionary, collection, stack, queue, and probably more.  
+
+**$defaultdata** is an array in which the developer hardcoded default values.
+
+The function **xor_encrypt** encrypts input text using [XOR Encryption Algorithm](https://en.wikipedia.org/wiki/XOR_cipher).  
+- ```$key = '<censored>';``` : the variable $key is assigned the string ```'<censored>'```
