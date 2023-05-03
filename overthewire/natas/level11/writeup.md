@@ -84,5 +84,16 @@ First of all, let's breakdown the code.
 
 **$defaultdata** is an array in which the developer hardcoded default values.
 
-The function **xor_encrypt** encrypts input text using [XOR Encryption Algorithm](https://en.wikipedia.org/wiki/XOR_cipher).  
+The function **xor_encrypt** encrypts input data using [XOR Encryption Algorithm](https://en.wikipedia.org/wiki/XOR_cipher).
+In the first half three variables are declared:
 - ```$key = '<censored>';``` : the variable $key is assigned the string ```'<censored>'```
+- ```$text = $in;```: user input assigned to the variable $text
+- ``` $outText = '';```: empty variable
+
+Then there is a for loop which performs XOR encryption for each character in turn.
+- ```for($i=0;$i<strlen($text);$i++)```: "counter $i" is equal to 0, while $i is less than the user input length ([strlen](https://www.php.net/manual/en/function.strlen.php)) performs action, when action is performed increment the value of $i by 1
+- ```$outText .= $text[$i] ^ $key[$i % strlen($key)];```: for character at index $i of $text perform XOR ([^](https://www.geeksforgeeks.org/php-bitwise-operators/)) with character of $key at index $i
+- ```return $outText;```: return XORed value
+
+
+The function **load_data**
