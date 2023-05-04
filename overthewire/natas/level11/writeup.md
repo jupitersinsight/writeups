@@ -96,4 +96,27 @@ Then there is a for loop which performs XOR encryption for each character in tur
 - ```return $outText;```: return XORed value
 
 
-The function **load_data**
+The function **loadData**
+- ```global $_COOKIE;```: global variable $\_COOKIE declaration
+- ```$mydata = $def;```: argument passed to the function is assigned to the variable $mydata
+- ```if(array_key_exists("data", $_COOKIE))```: [array_key_exists](https://www.php.net/manual/en/function.array-key-exists.php) - if the key "data" exists in $\_COOKIE perform next actions
+    - ```$tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);```: the value of key "data" is base64-decoded, the decoded value is passed as argument to the function **xor_encrypt**, the returned value is jeson-decoded and then assigned to the variable $tempdata
+- ```if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata))```: if the variable %tempdata is an array, and if the keys $showpassword and $bgcolor exist in the array, perform next actions
+    - ```if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor']))```: [preg_match](https://www.php.net/manual/en/function.preg-match.php) - if the regular expression matches the value of key bgcolor, perform next actions
+        - ```$mydata['showpassword'] = $tempdata['showpassword'];```: assign value of key showpassword in array $tempdata to key showpassword in array $mydata
+        - ```$mydata['bgcolor'] = $tempdata['bgcolor'];```: assign value of key bgcolor in array $tempdata to key bgcolor in array $mydata
+- ```return $mydata;```: return array $mydata
+
+
+The function **saveData** creates the cookie and send it to the client:
+- ```setcookie("data", base64_encode(xor_encrypt(json_encode($d))))```: [setcookie](https://www.php.net/manual/en/function.setcookie.php) - the value passed as argument to the function is json-encoded, the result is passed as argument to the function xor_encrypt, the returned value is base64-encoded and set as value of "data" in the cookie
+
+
+**$data = loadData($defaultdata);**: the result of the function loadData is assigned to the variable data
+
+
+```if(array_key_exists("bgcolor",$_REQUEST))```: [$\_REQUEST](https://www.php.net/manual/en/reserved.variables.request.php): if the key bgcolor exists in $\_REQUEST, perform next action  
+- ```if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor']))```: if the regular expression matches the value of key bgcolor, perorfm next action  
+    - ```$data['bgcolor'] = $_REQUEST['bgcolor'];```: assign the value of key bgcolor in $\_REQUEST to the key bgcolor in array $data
+
+**saveData($data);**: function saveData runw with argument $data(result from loadData)
