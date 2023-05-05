@@ -3,6 +3,7 @@
 ## Software used
 - Google Chrome + FoxyProxy
 - Burspsuite Community
+- [onlinephp.io](https://onlinephp.io/)
 
 ## Hint
 (source code)
@@ -126,3 +127,96 @@ The consists in exploiting the XOR encryption algorithm for which:
 1. plaintext ⊕ key = encrypted_text
 2. encrypted_text ⊕ plaintext = key
 3. encrypted_text ⊕ key = plaintext
+
+Extract cookie from Chrome DevTools or Burpsuite Proxy
+<img src="https://user-images.githubusercontent.com/110602224/236574429-18fbb292-38b5-4985-aefc-2fff77dd6305.png" widht=200 height=auto>
+                                         
+Cookie == ciphertext or encrypted_text
+$defaultData == plaintext
+                                         
+Point two = base64_decode(cookie) ⊕ json_encode($defaultData)
+
+PHP script to find the key:
+```php
+<?php
+
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = base64_decode("MGw7JCQ5OC04PT8jOSpqdmkgJ25nbCorKCEkIzlscm5oKC4qLSgubjY%3D");
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$key = xor_encrypt(json_encode($defaultdata));
+
+echo $key;
+
+?>
+```
+$key == KNHLKNHLKNHLKNHLKNHLKNHLKNHLKNHLKNHLKNHLK (The key is repeated because of the for loop on every character).
+    
+Create a cookie to test whether the key is valid or not
+Point one = base64_encode[json_encode($defaultData) ⊕ "KNHL"]
+```php
+<?php
+
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = "KNHL";
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$data = base64_encode(xor_encrypt(json_encode($defaultdata)));
+
+echo $data;
+
+?>
+```
+Cookie == MGw7JCQ5OC04PT8jOSpqdmkgJ25nbCorKCEkIzlscm5oKC4qLSgubjY=
+    
+So, now that we know that the key works, let's create a new cookie with "showpassword" set to "yes".
+```php
+<?php
+
+$defaultdata = array( "showpassword"=>"yes", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = "KNHL";
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$data = base64_encode(xor_encrypt(json_encode($defaultdata)));
+
+echo $data;
+
+?>
+```
+Cookie == MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nICQ8anZpbS4qLSguKmkz
+    
+In Burpsuite repeat a GET request for / using the new cookie and retrieve the password for the next level: **YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG**
+<img src="https://user-images.githubusercontent.com/110602224/236577300-301f784c-ad31-42cc-a4a1-567692c1a5bc.png" width=900 height=auto>
