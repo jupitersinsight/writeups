@@ -129,7 +129,7 @@ The consists in exploiting the XOR encryption algorithm for which:
 3. encrypted_text ⊕ key = plaintext
 
 Extract cookie from Chrome DevTools or Burpsuite Proxy
-<img src="https://user-images.githubusercontent.com/110602224/236574429-18fbb292-38b5-4985-aefc-2fff77dd6305.png" widht=200 height=auto>
+<img src="https://user-images.githubusercontent.com/110602224/236574429-18fbb292-38b5-4985-aefc-2fff77dd6305.png" width=200 height=auto>
                                          
 Cookie == ciphertext or encrypted_text
 $defaultData == plaintext
