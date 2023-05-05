@@ -86,7 +86,7 @@ First of all, let's breakdown the code.
 
 The function **xor_encrypt** encrypts input data using [XOR Encryption Algorithm](https://en.wikipedia.org/wiki/XOR_cipher).
 In the first half three variables are declared:
-- ```$key = '<censored>';``` : the variable $key is assigned the string ```'<censored>'```
+- ```$key = '<censored>';``` : to the variable $key is assigned the key to encrypt the plaintext and decrypt the ciphertext but it is <censored>
 - ```$text = $in;```: user input assigned to the variable $text
 - ``` $outText = '';```: empty variable
 
@@ -120,3 +120,9 @@ The function **saveData** creates the cookie and send it to the client:
     - ```$data['bgcolor'] = $_REQUEST['bgcolor'];```: assign the value of key bgcolor in $\_REQUEST to the key bgcolor in array $data
 
 **saveData($data);**: function saveData runw with argument $data(result from loadData)
+
+In order to resolve the lab we need to forge a new cookie in which the key "showpassword" is set to "yes". To do that we are going to perform a **[known-plaintext attack](https://alamot.github.io/xor_kpa/)** against the web application.  
+The consists in exploiting the XOR encryption algorithm for which:
+1. plaintext ⊕ key = encrypted_text
+2. encrypted_text ⊕ plaintext = key
+3. encrypted_text ⊕ key = plaintext
