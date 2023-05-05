@@ -128,8 +128,8 @@ The consists in exploiting the XOR encryption algorithm for which:
 2. encrypted_text ⊕ plaintext = key
 3. encrypted_text ⊕ key = plaintext
 
-Extract cookie from Chrome DevTools or Burpsuite Proxy
-<img src="https://user-images.githubusercontent.com/110602224/236574429-18fbb292-38b5-4985-aefc-2fff77dd6305.png" width=200 height=auto>
+Extract cookie from Chrome DevTools or Burpsuite Proxy  
+<img src="https://user-images.githubusercontent.com/110602224/236574429-18fbb292-38b5-4985-aefc-2fff77dd6305.png" width=600 height=auto>
                                          
 Cookie == ciphertext or encrypted_text
 $defaultData == plaintext
@@ -218,5 +218,5 @@ echo $data;
 ```
 Cookie == MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nICQ8anZpbS4qLSguKmkz
     
-In Burpsuite repeat a GET request for / using the new cookie and retrieve the password for the next level: **YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG**
+In Burpsuite repeat a GET request for / using the new cookie and retrieve the password for the next level: **YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG**  
 <img src="https://user-images.githubusercontent.com/110602224/236577300-301f784c-ad31-42cc-a4a1-567692c1a5bc.png" width=900 height=auto>
