@@ -76,7 +76,7 @@ function makeRandomPath($dir, $ext) {
     return $path;
 }
 ```
-The **makeRandomPath** function creates a full directory/filename path.  
+The **makeRandomPath()** function creates a full directory/filename path.  
 [file_exists](https://www.php.net/manual/en/function.file-exists.php): checks whether a file or directory exists  
 
 ```php
@@ -96,8 +96,8 @@ The PATHINFO_EXTENSION returns the extension of the file, example:
 ```
 Print the extension _txt_.
 
-The function **makeRandomPathFromFilename** takes two arguments, a directory name and a filename. From the filename is derived its extension. 
-The directory name and the extension are passed as arguments to the function **makeRandomPath**.  
+The function **makeRandomPathFromFilename()** takes two arguments, a directory name and a filename. From the filename is derived its extension. 
+The directory name and the extension are passed as arguments to the function **makeRandomPath()**.  
 
 ```php
 if(array_key_exists("filename", $_POST)) {
