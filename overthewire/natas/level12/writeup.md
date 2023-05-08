@@ -128,6 +128,17 @@ If [filesize](https://www.php.net/manual/en/function.filesize.php) returns _True
 If the file size is less than 1000 bytes the third and last nested if statement is run.  
 [move_uploaded_file](https://www.php.net/manual/en/function.move-uploaded-file.php) moves the uploaded file to a new randomized target path.  
 
+___
+
+Testing the upload function using a small .jpeg image file and capturing the POST request and response in Burpsuite Proxy:
+<img src="https://user-images.githubusercontent.com/110602224/236948230-b5c27164-c4d6-4914-b1e1-056900eb0069.png" width=900 height=auto>
+
+The upload request is made through the POST method with Content-Type _multipart/form-data_.  
+
+___
+
+
+
 
 
 
