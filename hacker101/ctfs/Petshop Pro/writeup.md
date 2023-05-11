@@ -31,4 +31,4 @@ This parameter carries the array(s) of all items in the cart.
 Using Burp Repeater it is possible to tamper the data. In order to retireve the flag all prices must be set to 0.
 
 _Values in **cart** parameter must be urlencoded_
-<img src="" width=900 height=auto>
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/b0c58c78-a9c7-489f-974f-ea9c07be1552" width=900 height=auto>
