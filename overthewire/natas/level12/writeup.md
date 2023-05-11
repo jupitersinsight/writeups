@@ -160,7 +160,7 @@ Turn the interception off and check the response in BurpProxy, as you can see th
 
 Requesting the uploaded file in Burp Repeater (or in the browser) returns a valid 200 response:  
 
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/10543d1c-059e-475b-8560-9c87280ed400" width=600 height=auto>
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/10543d1c-059e-475b-8560-9c87280ed400" width=900 height=auto>  
 
 Replace now the content of the php file with:
 ```
@@ -169,7 +169,7 @@ echo file_get_contents("/etc/natas_webpass/natas13");
 ?>
 ```  
 and repeat the upload process.  
-Request the php file either using Burp or the web browser and get the password: **lW3jYRI02ZKDBb8VtQBU1f6eDRo6WEj9**
+Request the php file either using Burp or the web browser and get the password for natas13: **lW3jYRI02ZKDBb8VtQBU1f6eDRo6WEj9**
 
 
 
