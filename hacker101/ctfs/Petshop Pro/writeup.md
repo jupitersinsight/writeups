@@ -10,7 +10,7 @@ Quick notes while testing:
 - link pages uses RESTful syntax
 - /login => 200 OK
     - username
-    - passowrd
+    - password
     - invalid username/password: invalid username ... username enumeration?
 
 _____
