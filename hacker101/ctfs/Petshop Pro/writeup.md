@@ -188,4 +188,23 @@ Follow the redirection to **/** and extract the flag.
 
 <img src="https://github.com/jupitersinsight/writeups/assets/110602224/3163000f-b7a4-4931-aabb-5b781d9fa7d1" width=900 height=auto>
 
+_____
+
+### Flag 2
+
+After successful login, we can access new resources (**/edit/id={id}**)  
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/661ed04c-f0c6-4465-ac50-94e063d24c39" width=450 height=auto>
+
+Since input validation is a huge attack surface may happen that developers do not implement a safe input handling mechanism application-wise. That's why we need to test every input and determine where the input data goes.  
+In this case, the vulnerable input field is _Name_. The input is reflected in the /edit page (where is handled in a safe way) and in /cart (where it is not).  
+Data stored from **/edit** is encoded to prevent attacks but when loaded in **/cart** it is decoded and loaded allowing us to execute arbitrary code, such as ```<img src=x onerror=alert(1)>``` (Stored XSS).  
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/842845de-50e2-4d5c-9ca9-fdc49c18767b" width=900 height=auto>
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/d057d571-1ec4-4440-9925-dff09615f2e8" width=900 height=auto>  
+
+The XSS payload is loaded and executed.
+
+
+
 
