@@ -90,6 +90,7 @@ Close the connection to the dataase.
 
 
 Payload to inject: `" OR 1=1-- `
+**Note that MySQL requires a single space after the comment operator --**
 
 ```php
 <?php
