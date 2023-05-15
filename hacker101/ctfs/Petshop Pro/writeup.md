@@ -5,16 +5,6 @@
 **Number of Flags**: 3
 _____
 
-Quick notes while testing:
-
-- link pages uses RESTful syntax
-- /login => 200 OK
-    - username
-    - password
-    - invalid username/password: invalid username ... username enumeration?
-
-_____
-
 ### Flag 0
 
 Capturing requests in Burp Proxy shows that products are returned in an array style:  
