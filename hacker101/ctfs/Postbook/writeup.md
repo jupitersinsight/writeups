@@ -39,6 +39,23 @@ Write the post and chage the user_id to **1** and send the request. The post is 
 
 <img src="https://github.com/jupitersinsight/writeups/assets/110602224/d2588964-0d84-45ac-a8b9-5f093983efd4" width=850 height=auto>  
 
+_____
+
+### Flag 3
+
+Flag 3 is found on post #945
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/d00c7ee6-e731-495d-8c61-25f8cd18a573)" width=900 heigth=auto>
+
+_____
+
+### Flag 4
+
+Edit another user's post to get flag #4
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/3a043a14-e681-4f4e-9f9a-0092910bcfff" widht=900 height=auto>
+
+_____
 
 
 
