@@ -12,6 +12,7 @@ Here you can find a collection of Writeups of challenges, CTFs, boxes from platf
 |------------|----------------------------------------|-----------------|
 | Trivial    | A little something to get you started  | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/hacker101/ctfs/A%20little%20something%20to%20get%20you%20started/writeup.md)|
 | Easy       | Petshop Pro                            | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/hacker101/ctfs/Petshop%20Pro/writeup.md)|
+| Easy       | Postbook                               | [Writeup](https://github.com/jupitersinsight/writeups/blob/main/hacker101/ctfs/Postbook/writeup.md)|
 
 ## OverTheWire - Natas
 
