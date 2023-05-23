@@ -57,6 +57,18 @@ Edit another user's post to get flag #4
 
 _____
 
+### Flag 5
+
+Decode session cookie (MD5 hash)
+**eccbc87e4b5ce2fe28308fd9f2a7baf3** = 3 while **c4ca4238a0b923820dcc509a6f75849b** = 1
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/4b01ad4b-2579-4a2b-a629-25dd14914a44" width=900 height=auto>
+
+_____
+
+### Flag 6
+
+
 
 
 
