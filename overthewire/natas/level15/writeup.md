@@ -200,5 +200,13 @@ if __name__ == "__main__":
     main()
 ```
 
-*This script is _raw_, it is fast but you need to kill the process to stop it.
+\*This script is _raw_: it is fast but you need to kill the process to stop it.  
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/0d4d4bb1-f534-4ffe-b221-1dff673f4557" width=600 height=auto>  
+
+Double-check the script result.  
+
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/c20e0ef8-326e-4bd7-b941-31d62b8f9542" width=900 height=auto>
+
+
 
