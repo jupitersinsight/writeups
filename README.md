@@ -35,3 +35,4 @@ Here you can find a collection of Writeups of challenges, CTFs, boxes from platf
 |12     | http://natas12.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level12/writeup.md)|
 |13     | http://natas13.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level13/writeup.md)|
 |14     | http://natas14.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level14/writeup.md)|
+|15     | http://natas15.natas.labs.overthewire.org | [Solution](https://github.com/jupitersinsight/writeups/blob/main/overthewire/natas/level15/writeup.md)|
