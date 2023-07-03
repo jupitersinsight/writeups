@@ -1,4 +1,4 @@
-**WIP**
+## Templated
 
 Machine is vulnerable to SSTI (Server-Side Template Injection)  
 
